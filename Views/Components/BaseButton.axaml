@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="routing.Views.Components.BaseButton"
+             x:Name="Root">
+    
+    <Button Width="120" Height="40" Background="DeepPink" CornerRadius="8"
+            Command="{Binding Action, ElementName=Root}" 
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center">
+        <Button.Styles>
+            <Style Selector="Button:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="#B20E66" />
+            </Style>
+            <Style Selector="Button /template/ ContentPresenter">
+                <Setter Property="BoxShadow" Value="0 4 12 0 #80000000" />
+            </Style>
+        </Button.Styles>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+            <Image Source="{Binding Icon, ElementName=Root}" 
+                   Width="20" Height="20"
+                   IsVisible="{Binding Icon, ElementName=Root, Converter={x:Static ObjectConverters.IsNotNull}}" />
+            <TextBlock Text="{Binding Label, ElementName=Root}" VerticalAlignment="Center" />
+        </StackPanel>
+    </Button>
+    
+</UserControl>
