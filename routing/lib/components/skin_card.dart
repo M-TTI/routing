@@ -1,23 +1,30 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:routing/components/base_button.dart';
 import 'package:routing/themes/theme.dart' as t;
 
-class SkeletonCard extends StatelessWidget {
-  const SkeletonCard({required this.isSmall, super.key});
+class SkinCard extends StatelessWidget {
+  const SkinCard({required this.isSmall, super.key});
 
   final bool isSmall;
 
   @override
   Widget build(BuildContext context) {
+    String? imagePath = null;
     Widget card;
 
     Widget imageArea(double size) {
-      return Container(
-        width: size, height: size,
-        decoration: BoxDecoration(
-          color: Theme.of(context).brightness == Brightness.light ? t.skeleton : t.skeletonDark,
-          borderRadius: BorderRadius.circular(8),
-        ),
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: imagePath != null
+            ? Image.file(
+                File(imagePath),
+                width: size,
+                height: size,
+                fit: BoxFit.cover
+        )
+            : Container(width: size, height: size, color: t.placeholder),
       );
     }
 
@@ -41,19 +48,14 @@ class SkeletonCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    width: 52, height: 30,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                  BaseButton(
+                    onPressed: () {},
+                    icon: Icons.open_in_new_outlined
                   ),
-                  Container(
-                    width: 52, height: 30,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                  SizedBox(height: 8),
+                  BaseButton(
+                    onPressed: () {},
+                    icon: Icons.download_outlined
                   ),
                 ],
               ),
@@ -74,20 +76,16 @@ class SkeletonCard extends StatelessWidget {
             children: [
               imageArea(260),
               Spacer(),
-              Container(
-                width: 172, height: 30,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondaryContainer,
-                  borderRadius: BorderRadius.circular(8),
-                ),
+              BaseButton(
+                onPressed: () {},
+                icon: Icons.open_in_new_outlined,
+                label: 'Open with Osu!'
               ),
               SizedBox(height: 8),
-              Container(
-                width: 172, height: 30,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondaryContainer,
-                  borderRadius: BorderRadius.circular(8),
-                ),
+              BaseButton(
+                onPressed: () {},
+                icon: Icons.download_outlined,
+                label: 'Download Skin',
               ),
             ],
           ),

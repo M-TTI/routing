@@ -13,13 +13,13 @@ const grey = Color(0xFF757575);
 const border = Color(0xFFBDBDBD);
 const skeleton = Color(0xFFC7B9B9);
 const skeletonDark = Color(0xFF524A5C);
-const placeholder = Color(0xFF969286);
+const placeholder = Color(0xFF737183);
 
 const cardShadow = [
   BoxShadow(
     offset: Offset(0, 4),
     blurRadius: 4,
-    color: black,
+    color: shadow,
   ),
 ];
 
@@ -55,9 +55,10 @@ ThemeData buildTheme(Brightness brightness) {
       onPrimary: white,
       primaryContainer: isLight ? lightPrimary : darkPrimary,
       onPrimaryContainer: isLight ? darkPrimary : lightPrimary,
+      secondaryContainer: isLight ? skeleton : skeletonDark,
       error: error,
       onError: white,
-      surface: isLight ? white : darkPrimary,
+      surface: isLight ? lightPrimary : darkPrimary,
       onSurface: isLight ? black : white,
       onSurfaceVariant: isLight ? grey : border,
       outline: border,

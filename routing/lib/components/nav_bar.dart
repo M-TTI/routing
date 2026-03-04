@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:routing/components/base_button.dart';
+import 'package:routing/main.dart';
 import 'package:routing/themes/theme.dart' as t;
 
 class NavBar extends StatelessWidget {
@@ -30,6 +31,15 @@ class NavBar extends StatelessWidget {
           Text(
             title,
             style: Theme.of(context).textTheme.titleMedium,
+          ),
+          SizedBox(width: 8),
+          FilledButton(
+            child: Icon(Icons.brightness_2),
+            onPressed: () {
+              themeModeNotifier.value = themeModeNotifier.value == ThemeMode.light
+                  ? ThemeMode.dark
+                  : ThemeMode.light;
+            },
           ),
           Spacer(),
           BaseButton( // Add Button

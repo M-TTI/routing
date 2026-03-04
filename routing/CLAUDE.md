@@ -73,3 +73,7 @@ The `Skins` table stores imported skin metadata:
 - `size` (real — file size)
 
 After changing table definitions, regenerate with `dart run build_runner build`.
+
+## Workflow Preferences
+
+- **Never edit files without explicit permission.** When asked about code changes, show what to change and explain it. Only apply edits when the user explicitly asks you to make the change.

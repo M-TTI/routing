@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:routing/components/nav_bar.dart';
 import 'package:routing/components/skeleton_card.dart';
+import 'package:routing/components/skin_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -24,7 +24,15 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             NavBar(title: widget.title, isSmall: isSmall),
-            Expanded(child: Center(child: SkeletonCard(isSmall: isSmall))),
+            Expanded(
+              child: Center(child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SkeletonCard(isSmall: isSmall),
+                  SkinCard(isSmall: isSmall),
+                ],
+              ),
+            )),
           ],
         ),
       ),
