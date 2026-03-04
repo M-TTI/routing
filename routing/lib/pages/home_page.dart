@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:routing/components/nav_bar.dart';
+import 'package:routing/components/skeleton_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             NavBar(title: widget.title, isSmall: isSmall),
-            const Expanded(child: Center(child: Text('HelloWorld!'))),
+            Expanded(child: Center(child: SkeletonCard(isSmall: isSmall))),
           ],
         ),
       ),
