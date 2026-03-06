@@ -5,7 +5,7 @@ import 'package:path/path.dart' as p;
 import 'package:flutter_archive/flutter_archive.dart';
 
 class SkinImporter {
-  Future<List<File>> _selectFiles() async {
+  static Future<List<File>> _selectFiles() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true, allowedExtensions: ['.osk', '.zip']);
 
     if (result != null) {
@@ -17,7 +17,7 @@ class SkinImporter {
     return List.empty();
   }
 
-  Future<bool> _extractFile(File file, Directory targetDir) async {
+  static Future<bool> _extractFile(File file, Directory targetDir) async {
     try {
       ZipFile.extractToDirectory(zipFile: file, destinationDir: targetDir);
     } catch (e) {
@@ -27,13 +27,14 @@ class SkinImporter {
     return true;
   }
 
-  Future<bool> _saveFile(File file, Directory tmpDir) async {
+  static Future<bool> _saveFile(File file, Directory tmpDir) async {
     // Moves the archive to the tmp dir
     await file.rename(p.join(tmpDir.path, p.basename(file.path)));
+    Directory tmpExtract = await Directory(p.join(tmpDir.path, 'extract')).create();
 
   }
 
-  Future<void> importFiles() async {
+  static Future<void> importFiles() async {
     List<File> files = await _selectFiles();
 
     if (files.isEmpty) {
@@ -41,7 +42,8 @@ class SkinImporter {
     }
 
     Directory tmpDir = await getTemporaryDirectory();
-    Directory tmpRoutingDir = await Directory(p.join(tmpDir.path, 'Routing')).createTemp();
+    // Tout s'effectue dans tmpRoutingDir
+    Directory tmpRoutingDir = await Directory(p.join(tmpDir.path, 'Routing')).create();
 
 
   }
