@@ -32,6 +32,37 @@ Le design a été réalisé avec [Lunacy](https://icônes8.fr/lunacy), un logici
 
 ## 📐 Architecture & UML
 
+### Structure du code
+
+Les fichiers du code source se trouvent dans `/src/lib`
+Les dépendances se trouvent dans `src/pubspec.yaml`
+```
+src/lib/                                                                                                              
+  ├── main.dart                                                                                                      
+  ├── components/                                                                                                       
+  │   ├── base_button.dart                                                                                            
+  │   ├── nav_bar.dart                                                                                                  
+  │   ├── side_menu.dart                                                                                                
+  │   ├── skeleton_card.dart                                                                                            
+  │   └── skin_card.dart                                                                                                
+  ├── databases/                                                                                                        
+  │   ├── database.dart                                                                                                 
+  │   └── database.g.dart       ← code auto-généré par Drift (Flutter ORM)                                     
+  ├── pages/                                                                                                            
+  │   ├── home_page.dart
+  │   └── dialogs/
+  │       ├── osu_path_dialog.dart
+  │       └── settings_dialog.dart
+  ├── services/
+  │   ├── settings_service.dart
+  │   └── skin_service.dart
+  ├── themes/
+  │   └── theme.dart
+  └── viewmodels/
+      ├── home_viewmodel.dart
+      └── settings_viewmodel.dart
+```
+
 L'application suit une architecture **MVVM** (Model-View-ViewModel) avec le package `provider` pour l'injection de dépendances.
 
 ### Diagramme de séquence
@@ -238,6 +269,6 @@ L'assistant IA utilisé pendant le développement du projet est **Claude Code** 
 ## ⚖️ Auto-Évaluation
 - **Ce qui fonctionne bien :** Toutes les features fonctionnent comme prévu (ou parfois même mieux que prévu) à l'exception de l'image de prévisualisation qui est très pixélisée, mais d'un autre côté j'avais prévu à la base d'abandonner cette idée, je suis content d'avoir pu le faire. La feature Ouvrir avec Osu! fonctionne très bien, et la manière dont je l'ai implémenté fait que osu s'occupe des messages d'erreurs en cas d'échec. Je suis aussi plutôt satisfait du UI (mon point faible), Flutter est puissant et assez simple à prendre en main, j'ai pris le temps au début de créer `src/lib/themes/theme.dart` pour y répertorier mes couleurs, icônes et surcharger le Thème Material pour appliquer tout ça à toute l'app sans trop d'effort. Je suis très satisfait du rendu.
 
-- **Difficultés rencontrées :** **Les images de prévisualisation !** Même à présent, cette feature n'est pas parfaite et le numéro 1 ne s'affiche pas pour certains skins. Osu! permet un grand nombre de manières différentes d'afficher les éléments d'un skin en jeu, ainsi, deux skins peuvent avoir une architecture assez différente et c'est difficile de couvrir tous les cas particuliers. J'ai commencé à développer avec .NET Avalonia et j'ai eu tellement de problèmes lors de la création de l'UI que j'ai tout supprimé et recommencé le projet en Flutter dart. Au final, c'était une bonne décision, j'ai eu beaucoup moins de mal comme ça. J'ai eu aussi la super idée (c'est un mensonge) de m'attaquer à la logique de l'import des skins dans le train lors de mes trajets au travail, lorsque je n'étais pas bien réveillé ce qui, je pense, a un peu augmenté le temps passé sur la feature.
+- **Difficultés rencontrées :** **Les images de prévisualisation !** Même à présent, cette feature n'est pas parfaite et le numéro 1 ne s'affiche pas pour certains skins. Osu! permet un grand nombre de manières différentes d'afficher les éléments d'un skin en jeu, ainsi, deux skins peuvent avoir une architecture assez différente et c'est difficile de couvrir tous les cas particuliers. J'ai commencé à développer avec .NET Avalonia et j'ai eu tellement de problèmes lors de la création de l'UI que j'ai tout supprimé et recommencé le projet en Flutter dart. Au final, c'était une bonne décision, j'ai eu beaucoup moins de mal comme ça. J'ai eu aussi la super idée (c'est un mensonge) de m'attaquer à la logique de l'import des skins dans le train lors de mes trajets au travail, lorsque je n'étais pas bien réveillé ce qui, je pense, a un peu augmenté le temps passé sur la feature. Pour finir, j'ai implémenté du lazy loading (`src/lib/components/skeleton_card.dart`) mais les donnés chargent trop vite et on a pas le temps de le voir, Je n'ai pas pu me pencher sur un moyen de ralentir l'appli pour la démo...
 
 - **Si c'était à refaire :** J'aurais commencé directement en Flutter ! Ce qui m'embête le plus par rapport à l'état actuel du projet, c'est le système de notifications qui nécessite une librairie Linux d'installée. Je l'ai laissé comme ça pour l'interaction avec l'OS mais je pense qu'il aurait été mieux de faire des snacks (toasts Flutter, système de notifications interne à l'application). C'est la première chose que je changerais. Aussi, je stocke la taille du skin sans rien en faire pour le moment car je n'ai pas trouvé d'emplacement pour l'afficher dans l'UI sans que ça fasse bizarre, Je réfléchirais à implémenter un show pour chaque skin, pour afficher des informations supplémentaires (dont la taille), un système de tags pour trier les skins et une barre de recherche dans le listing. Aussi la feature d'import/export à laquelle je réfléchis encore mais je n'ai pas encore d'implémentation à proposer.
