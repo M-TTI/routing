@@ -215,6 +215,38 @@ L'arborescence ressemble à ceci
 ## 🚀 Installation & Lancement
 Guide pas-à-pas pour qu'un développeur puisse lancer le projet.
 
+### Prérequis — Installer Flutter
+
+> Voir la [documentation officielle](https://docs.flutter.dev/install) pour plus de détails.
+
+**Linux (Debian/Ubuntu)**
+```bash
+# Dépendances système requises pour Flutter desktop
+sudo apt-get update -y && sudo apt-get upgrade -y
+sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev libstdc++-12-dev curl git unzip xz-utils zip libglu1-mesa
+
+# Télécharger le SDK Flutter
+cd ~/development
+tar xf ~/Downloads/flutter_linux_*-stable.tar.xz
+
+# Ajouter Flutter au PATH (bash)
+echo 'export PATH="$HOME/development/flutter/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+# Vérifier l'installation
+flutter doctor
+```
+
+**Windows**
+```powershell
+# Télécharger le SDK sur https://docs.flutter.dev/install
+# Extraire dans C:\src\flutter (éviter les dossiers système)
+# Ajouter C:\src\flutter\bin au PATH via les variables d'environnement système
+
+# Vérifier l'installation
+flutter doctor
+```
+
 Les paquets `libnotify` et `libnotify-dev`/`libnotify-devel` (en fonction de la distribution) sont nécessaires pour build l'application
 
 ```bash
@@ -236,6 +268,10 @@ flutter pub get
 # Lancer l'application
 flutter run -d linux    # Linux
 flutter run -d windows  # Windows
+
+# En cas d'erreur
+flutter clean
+# Puis relancer l'application
 ```
 
 ---
